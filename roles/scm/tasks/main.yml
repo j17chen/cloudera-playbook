@@ -9,6 +9,7 @@
     - cloudera-manager-server
     - cloudera-manager-agent
     - openldap-clients
+    disable_gpg_check: yes
     state: installed
 
 - name: Prepare Cloudera Manager Server External Database
@@ -43,9 +44,23 @@
     - wait cloudera-scm-server
   with_items:
     - cloudera-scm-server
-    - cloudera-scm-agent
 
+- name: Start the Cloudera Manager Server
+  service:
+    name: "{{ item }}"
+    state: stopped
+  with_items:
+    - cloudera-scm-server
+
+- name: restart cloudera-scm-server
+  service:
+    name: cloudera-scm-server
+    state: restarted
 # Trigger handler to wait for SCM to startup
+
+- name: Wait for agent heartbeats
+  pause:
+    seconds: 180
 - meta: flush_handlers
 
 - name: Get Cloudera Manager API version

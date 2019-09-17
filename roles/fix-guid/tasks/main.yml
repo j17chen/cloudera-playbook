@@ -1,0 +1,12 @@
+---
+#Apply work-arounds for know CM issue
+- name: Cleanup guid files
+  file:
+    path: "/var/lib/cloudera-scm-agent/cm_guid"
+    state: absent
+
+- name: Restart Cloudera Manager Agents
+  service:
+    name: cloudera-scm-agent
+    state: restarted
+    enabled: yes

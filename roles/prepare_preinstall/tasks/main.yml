@@ -1,0 +1,28 @@
+---
+#Apply work-arounds for know CM issue
+- name: stop agents
+  service:
+    name: cloudera-scm-agent
+    state: stopped
+  ignore_errors: True
+
+- name: stop server
+  service:
+    name: cloudera-scm-server
+    state: stopped
+  ignore_errors: True
+
+- name: Remove the Cloudera Manager  Packages
+  yum:
+    name:
+    - cloudera-manager-daemons
+    - cloudera-manager-server
+    - cloudera-manager-agent
+    state: absent
+  ignore_errors: True
+
+- name: Cleanup guid files
+  file:
+    path: "/var/lib/cloudera-scm-agent/cm_guid"
+    state: absent
+  ignore_errors: True

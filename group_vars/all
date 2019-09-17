@@ -9,7 +9,7 @@ tmp_dir: /tmp
 
 krb5_realm: MIT.EXAMPLE.COM
 # 'Active Directory', 'MIT KDC', or 'none' to disable security
-krb5_kdc_type: MIT KDC
+krb5_kdc_type: none
 krb5_kdc_admin_user: "cloudera-scm/admin@{{ krb5_realm }}"
 krb5_kdc_admin_passwd: changeme
 krb5_kdc_master_passwd: changeme
@@ -38,13 +38,13 @@ ad_site: Default-First-Site-Name
 ## ------------------------------------------------------------------------------------------------------------
 
 # Version of CDH to install
-cluster_version_cdh: 6.3.0
+cluster_version_cdh: 5.15.2
 
 # Version of Cloudera Manager to install
 cluster_version_cm:  "{{ cluster_version_cdh }}"
 
 # Version of CDS Powered by Apache Spark (note: not installed if CDH6 is also selected)
-cluster_version_cds: 2.4.0.cloudera2
+cluster_version_cds: 2.2.0.cloudera4
 
 # Helper variables for major and minor versions
 cluster_version_cdh_major: "{{ cluster_version_cdh.split('.')[0] }}"
@@ -68,6 +68,7 @@ configs_by_version:
     scm_parcel_repositories: 
       - "{{ cloudera_archive }}/cdh6/{{ cluster_version_cdh }}/parcels"
     scm_prepare_database_script_path: "/opt/cloudera/cm/schema/scm_prepare_database.sh"
+    scm_csds: ""
 
 scm_default_user: admin
 scm_default_pass: admin
@@ -77,15 +78,16 @@ scm_parcel_repositories:            "{{ configs_by_version[cluster_version_cdh_m
 scm_prepare_database_script_path:   "{{ configs_by_version[cluster_version_cm_major].scm_prepare_database_script_path }}"
 scm_repo_url:                       "{{ configs_by_version[cluster_version_cm_major].scm_repo_url }}"
 scm_repo_gpgkey:                    "{{ scm_repo_url }}/RPM-GPG-KEY-cloudera"
+scm_csds:  "{{ configs_by_version[cluster_version_cm_major].scm_csds }}"
 
 ## ------------------------------------------------------------------------------------------------------------
 ## Java installation options
 ## ------------------------------------------------------------------------------------------------------------
 
-java_installation_strategy: package       # can be set to 'none', 'package' or 'rpm'
+java_installation_strategy: rpm       # can be set to 'none', 'package' or 'rpm'
 
 java_package: java-1.8.0-openjdk
-java_rpm_location: /tmp/jdk-8u181-linux-x64.rpm
+java_rpm_location: roles/java/files/jdk-8u221-linux-x64.rpm
 java_rpm_remote_src: no
-java_jce_location: /tmp/jce_policy-8.zip
+java_jce_location: roles/java/files/jce_policy-8.zip
 java_jce_remote_src: no

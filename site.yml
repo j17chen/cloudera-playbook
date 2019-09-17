@@ -1,5 +1,9 @@
 ---
 # Cloudera playbook
+- name: Configure Cloudera Manager Repository
+  hosts: cdh_servers
+  roles:
+    - prepare_preinstall
 
 - name: Configure Cloudera Manager Repository
   hosts: cdh_servers
@@ -64,6 +68,11 @@
   roles:
     - scm
   tags: cluster_template
+
+- name: Fix GUID issue
+  hosts: cdh_servers
+  roles:
+    - fix-guid
 
 - name: Install CDH
   hosts: scm_server
