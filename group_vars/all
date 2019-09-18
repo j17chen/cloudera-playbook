@@ -44,7 +44,7 @@ cluster_version_cdh: 5.15.2
 cluster_version_cm:  "{{ cluster_version_cdh }}"
 
 # Version of CDS Powered by Apache Spark (note: not installed if CDH6 is also selected)
-cluster_version_cds: 2.2.0.cloudera4
+cluster_version_cds: 2.2.0.cloudera1
 
 # Helper variables for major and minor versions
 cluster_version_cdh_major: "{{ cluster_version_cdh.split('.')[0] }}"
