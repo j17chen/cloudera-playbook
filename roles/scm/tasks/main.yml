@@ -60,7 +60,7 @@
 
 - name: Wait for agent heartbeats
   pause:
-    seconds: 180
+    seconds: 60
 - meta: flush_handlers
 
 - name: Get Cloudera Manager API version

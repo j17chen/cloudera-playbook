@@ -1,32 +1,32 @@
+
 [scm_server]
-<host>
-
+c2282-node1.squadron.support.hortonworks.com ansible_host=c2282-node1.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
 [db_server]
-<host>
-
+c2282-node1.squadron.support.hortonworks.com ansible_host=c2282-node1.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
 [krb5_server]
-<host>
+c2282-node1.squadron.support.hortonworks.com ansible_host=c2282-node1.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
 
 [utility_servers:children]
 scm_server
 db_server
-krb5_server
 
 [gateway_servers]
-<host>        host_template=HostTemplate-Gateway
+c2282-node1.squadron.support.hortonworks.com ansible_host=c2282-node1.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen" host_template=HostTemplate-Gateway
+c2282-node2.squadron.support.hortonworks.com ansible_host=c2282-node2.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen" host_template=HostTemplate-Gateway
+c2282-node3.squadron.support.hortonworks.com ansible_host=c2282-node3.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen" host_template=HostTemplate-Gateway
+c2282-node4.squadron.support.hortonworks.com ansible_host=c2282-node4.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen" host_template=HostTemplate-Gateway
 
 [edge_servers]
-<host>        host_template=HostTemplate-Edge    role_ref_names=HDFS-HTTPFS-1
+c2282-node4.squadron.support.hortonworks.com        host_template=HostTemplate-Edge    role_ref_names=HDFS-HTTPFS-1
 
 [master_servers]
-<host>        host_template=HostTemplate-Master1
-<host>        host_template=HostTemplate-Master2
-<host>        host_template=HostTemplate-Master3
+c2282-node1.squadron.support.hortonworks.com ansible_host=c2282-node1.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"        host_template=HostTemplate-Master1
+c2282-node2.squadron.support.hortonworks.com ansible_host=c2282-node2.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"       host_template=HostTemplate-Master2
 
 [worker_servers]
-<host>
-<host>
-<host>
+c2282-node2.squadron.support.hortonworks.com ansible_host=c2282-node2.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
+c2282-node3.squadron.support.hortonworks.com ansible_host=c2282-node3.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
+c2282-node4.squadron.support.hortonworks.com ansible_host=c2282-node4.squadron.support.hortonworks.com ansible_user=root ansible_ssh_pass="jechen"
 
 [worker_servers:vars]
 host_template=HostTemplate-Workers
@@ -38,4 +38,3 @@ master_servers
 worker_servers
 
 [all:vars]
-ansible_user=ec2-user

@@ -9,6 +9,7 @@
     - cloudera-manager-daemons
     - cloudera-manager-agent
     update_cache: yes
+    disable_gpg_check: yes
     state: installed
 
 - name: Configure Cloudera Manager Agent 'server_host'

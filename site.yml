@@ -1,5 +1,5 @@
 ---
-# Cloudera playbook
+#Cloudera playbook
 - name: Configure Cloudera Manager Repository
   hosts: cdh_servers
   roles:
